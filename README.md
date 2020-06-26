@@ -1,2 +1,2 @@
 # MERN-social-network-backend: 
-A social networking web app built using the MERN stack.
+Backend of social networking app built using the MERN stack.
