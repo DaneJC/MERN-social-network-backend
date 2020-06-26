@@ -1,1 +1,1 @@
-# social-network: A social networking app built using the MERN stack.
+# social-network: A social networking web app built using the MERN stack.
