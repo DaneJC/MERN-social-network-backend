@@ -18,6 +18,9 @@ require("dotenv").config();
 // bodyparser
 const bodyParser = require("body-parser");
 
+// cookieparser
+const cookieParser = require("cookie-parser");
+
 // express-validator
 const expressValidator = require("express-validator");
 
@@ -25,6 +28,7 @@ const expressValidator = require("express-validator");
 // bodyparser
 app.use(express.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(expressValidator());
 
 // console.log(String(process.env.MONGO_URI));

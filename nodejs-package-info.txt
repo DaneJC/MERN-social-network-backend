@@ -1,0 +1,27 @@
+{
+	express: Fast, unopinionated, minimalist web framework for node.
+}, 
+{
+	mongoose: Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
+}, 
+{
+	dotenv: Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. storing configuration in the environment separate from code.
+}, 
+{
+	body-parser: Node.js body parsing middleware. Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+}, 
+{
+	jsonwebtoken: Used to create token cookies in the web browser.
+},
+{
+	express-jwt: This module provides Express middleware for validating JWTs (JSON Web Tokens) through the jsonwebtoken module. The decoded JWT payload is available on the request object
+},
+{
+	cookie-parser: Parse Cookie header and populate req.cookies with an object keyed by the cookie names. Optionally you may enable signed cookie support by passing a secret string, which assigns req.secret so it may be used by other middleware.
+},
+{
+	express-validator: Used to validate form posts. express-validator is a set of express.js middlewares that wraps validator.js validator and sanitizer functions. 
+},
+{
+
+}
