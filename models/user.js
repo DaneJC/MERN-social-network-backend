@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
 /* ##### VIRTUAL FIELDS ##### */ 
 userSchema
     .virtual("password")
-    .set((password) => {
+    .set(function(password) {
         // create temporary variable called _password
         this._password = password;
         // generate a timestamp
@@ -42,31 +42,26 @@ userSchema
         // encryptPassword()
         this.pw_hash = this.encryptPassword(password);
     })
-    .get(() => {
+    .get(function() {
         return this._password;
     });
 
 /* ##### METHODS ##### */ 
-userSchema.methods = {
+userSchema.methods.authenticate = function(plainText) {
+    return this.encryptPassword(plainText) === this.pw_hash;
+};
 
-    encryptPassword: (password) => {
-
-        if (!password) return "";
-        
-        try {
-            console.log(uuidv1());
-            return crypto
-                .createHmac("sha1", this.salt)
-                .update(password)
-                .digest("hex");
-        } catch (err) {
-            return "";
-        }
-    },
-
-    authenticate: (pwPlainText) => {
-        return this.encryptPassword === this.pw_hash;
+userSchema.methods.encryptPassword = function(password) {
+    if (!password) return "";
+    try {
+        return crypto
+            .createHmac("sha1", this.salt)
+            .update(password)
+            .digest("hex");
+    } catch (err) {
+        return "";
     }
-}
+};
+
 
 module.exports = mongoose.model("User", userSchema);

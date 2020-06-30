@@ -12,6 +12,9 @@ mongoose.connect(db, {useNewUrlParser: true})
 .then(() => console.log("connected to MongoDB.."))
 .catch(err => console.log(err));
 
+// CORS 
+const cors = require('cors');
+
 // dotenv
 require("dotenv").config();
 
@@ -30,6 +33,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
+app.use(cors());
 
 // console.log(String(process.env.MONGO_URI));
 
