@@ -19,9 +19,7 @@ exports.signup = async (req, res) => { // check if user email exist in db
     res.json({user})
 };
 
-exports.signin = async (req, res) => { 
-
-    
+exports.login = async (req, res) => { 
     // find user email
     const {email, password} = req.body;
     User.findOne({email}, (err, user) => {
@@ -49,9 +47,9 @@ exports.signin = async (req, res) => {
     });
 };
 
-exports.signout = (req, res) => {
+exports.logout = (req, res) => {
     res.clearCookie('t');
-    return res.json({ message: 'Signout success!' });
+    return res.json({ message: 'Logout success!' });
 };
 
 exports.requireSignin = expressJwt({
