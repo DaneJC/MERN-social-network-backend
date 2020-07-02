@@ -7,7 +7,7 @@ exports.signup = async (req, res) => { // check if user email exist in db
     const userExists = await User.findOne({email: req.body.email});
     // if email exist notify user
     if (userExists) 
-        return res.status(403).json({error: "Email already exists."});
+        return res.status(403).json({error: {param: "email", msg: "Email already exists."}});
     
     // if email not in db create new user
     const user = await new User(req.body);
@@ -22,13 +22,14 @@ exports.signup = async (req, res) => { // check if user email exist in db
 exports.login = async (req, res) => { 
     // find user email
     const {email, password} = req.body;
+    
     User.findOne({email}, (err, user) => {
         
         // if error or no email found 
-        if (err || !user) return res.status(401).json({error: "Email does not exist."});
+        if (err || !user) return res.status(401).json({error: {param: "email", msg: "Email does not exist."}});
 
         // if email exist compare password
-        if(!user.authenticate(password)) return res.status(401).json({error: "Incorrect password."});
+        if(!user.authenticate(password)) return res.status(401).json({error: {param: "password", msg: "Incorrect password."}});
 
         // if password matched 
         if(user.authenticate(password)) {

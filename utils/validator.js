@@ -1,5 +1,4 @@
 exports.signupValidator = (req, res, next) => {
-
     /* ##### FORENAME ##### */
     // not empty
     req.check("forename", "Forename required.").notEmpty();
@@ -30,10 +29,43 @@ exports.signupValidator = (req, res, next) => {
 
     /* ##### CHECK FOR ERRORS ##### */
     const errors = req.validationErrors();
-    // if erros exist display to user
+    // if errors exist display to user
     if (errors) {
-        const firstError = errors.map(error => error.msg)[0];
-        return res.status(400).json({error: firstError});
+        // console.log(errors);
+        const firstError = errors.map(error => error)[0];
+        return res.status(401).json({error: firstError});
+        // return res.status(400).json(errors);
+    }
+    // proceed to next middleware
+    next();
+}
+
+exports.loginValidator = (req, res, next) => {
+    
+    /* ##### EMAIL ##### */
+    // not empty
+    req.check("email", "Enter email.").notEmpty();
+    // email contains .(dot) and @ with min length 4 and max length 150
+    req.check('email', 'Email must be between 4 to 150 characters')
+        .matches(/.+\@.+\..+/)
+        .withMessage('Invalid email.')
+        .isLength({
+            min: 4,
+            max: 150
+        });
+   
+    /* ##### PASSWORD ##### */
+    // not empty
+    req.check("password", "Enter password.").notEmpty();
+
+    /* ##### CHECK FOR ERRORS ##### */
+    const errors = req.validationErrors();
+    // if errors exist display to user
+    if (errors) {
+        // console.log(errors);
+        const firstError = errors.map(error => error)[0];
+        return res.status(401).json({error: firstError});
+        // return res.status(400).json(errors);
     }
     // proceed to next middleware
     next();
