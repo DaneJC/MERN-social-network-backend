@@ -34,6 +34,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
 app.use(cors());
+app.use(function(err, req, res, next) {
+    if (err.name === "UnauthorizedError") {
+        res.status(401).json({ error: "Unauthorized operation." });
+    }
+});
 
 // console.log(String(process.env.MONGO_URI));
 

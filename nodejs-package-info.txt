@@ -23,5 +23,5 @@
 	express-validator: Used to validate form posts. express-validator is a set of express.js middlewares that wraps validator.js validator and sanitizer functions. 
 },
 {
-
+	formidable: A node.js module for parsing form data, especially file uploads.
 }
