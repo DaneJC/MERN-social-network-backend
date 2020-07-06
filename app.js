@@ -44,6 +44,7 @@ app.use(function(err, req, res, next) {
 
 /* ##### ROUTES ##### */
 app.use("/", require("./routes/post"));
+app.use("/", require("./routes/user"));
 app.use("/", require("./routes/auth"));
 
 const PORT = process.env.PORT || 8080;
