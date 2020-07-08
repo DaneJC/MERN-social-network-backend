@@ -45,6 +45,7 @@ exports.createPost = (req, res, next) => {
         }
         // create new Post with the fields received from the request
         let post = new Post(fields);
+        console.log(fields);
 
         // assign the post to a User (author)
         req.profile.pw_hash = undefined;
@@ -76,8 +77,8 @@ exports.getPosts = (req, res) => {
         // .populate("comments", "text created")
         // .populate("comments.postedBy", "_id name")
         // .select("_id title body created likes")
-        .select("_id title body created")
-        // .sort({ created: -1 })
+        .select("_id body created")
+        .sort("-created")
         .then((posts) => {
             res.json(posts);
         })
@@ -85,11 +86,12 @@ exports.getPosts = (req, res) => {
 };
 
 exports.getPostsByUser = (req, res) => {
-    Post.find({ author: req.profile._id })
+    Post.find({$or:[{ author: req.profile._id},{ receiver: req.profile._id }]})
         .populate('author', '_id forename surname')
+        .populate('receiver', '_id forename surname')
         // .select('_id title body created likes')
-        .select('_id title body created')
-        .sort('_created')
+        .select('_id body created')
+        .sort('-created')
         .exec((err, posts) => {
             if (err) {
                 return res.status(400).json({

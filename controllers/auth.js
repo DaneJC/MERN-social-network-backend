@@ -16,10 +16,19 @@ exports.signup = async (req, res) => {
     const user = await new User(req.body);
     await user.save();
 
-    console.log(user);
+    // generate token
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
 
-    // respond with the newly created user
-    res.json({ user });
+    // store the token as 't' with expiry date in cookies with maxAge 2hours
+    res.cookie("t", token, { maxAge: 2 * 60 * 60 * 1000 }); 
+
+    // respond with new user and token
+    const { _id, name, email, forename, surname } = user;
+    console.log(user);
+    return res.json({
+        token,
+        user: { _id, name, email, forename, surname }
+    });
 };
 
 exports.login = async (req, res) => {

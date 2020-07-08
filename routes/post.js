@@ -14,7 +14,7 @@ const { createPostValidator } = require("../utils/validator");
 const { getUserById } = require("../controllers/user");
 
 // router.get("/", (req, res) => res.send("home"));
-router.get("/post", getPosts);
+router.get("/posts", getPosts);
 
 // get posts by userId
 router.get("/posts/by/:userId", getPostsByUser);

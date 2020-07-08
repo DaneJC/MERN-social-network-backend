@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 // const { ObjectID }  = mongoose.Schema;
 
 const postSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-        minlength: 4,
-        maxlength: 150,
-    },
+    // title: {
+    //     type: String,
+    //     required: true,
+    //     minlength: 4,
+    //     maxlength: 150,
+    // },
     body: {
         type: String,
         required: true,
@@ -21,6 +21,10 @@ const postSchema = new mongoose.Schema({
     },
     // * mongoose relationship *
     author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
+    receiver: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
